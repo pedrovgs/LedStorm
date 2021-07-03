@@ -15,11 +15,14 @@ GPIO.setup(GPIO_ECHO, GPIO.IN)
  
 def distance():
     print ("Starting measure process")
+    # set Trigger to LOW
+    GPIO.output(GPIO_TRIGGER, False)
+    time.sleep(0.00002)
     # set Trigger to HIGH
     GPIO.output(GPIO_TRIGGER, True)
     print ("Trigger pin set to true")
-    # set Trigger after 0.01ms to LOW
-    time.sleep(0.00001)
+    # set Trigger after 0.05ms to LOW
+    time.sleep(0.00005)
     GPIO.output(GPIO_TRIGGER, False)
     print ("Trigger pin set to false")
     StartTime = time.time()
@@ -27,10 +30,12 @@ def distance():
     print ("Waiting for first echo value")
     # save StartTime
     while GPIO.input(GPIO_ECHO) == 0:
+        print (GPIO.input(GPIO_ECHO))
         StartTime = time.time()
     print ("Waiting for last echo value")
     # save time of arrival
     while GPIO.input(GPIO_ECHO) == 1:
+        print (GPIO.input(GPIO_ECHO))
         StopTime = time.time()
     print ("Waiting echo value received")
     # time difference between start and arrival
