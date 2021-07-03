@@ -14,27 +14,28 @@ GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
 GPIO.setup(GPIO_ECHO, GPIO.IN)
  
 def distance():
-    print ("Starting measure process. Waiting for sensor to settle")
-    GPIO.output(GPIO_TRIGGER, False)
-    time.sleep(2)
-    print ("Sensor ready")
+    print ("Starting measure")
     # set Trigger to HIGH
     print ("Setting trigger to true")
-    GPIO.output(GPIO_TRIGGER, True)
+    GPIO.output(GPIO_TRIGGER, GPIO.HIGH)
     # set Trigger after 0.00001 = 0.01ms to LOW
     time.sleep(0.00001)
     print ("Setting trigger to false")
-    GPIO.output(GPIO_TRIGGER, False)
+    GPIO.output(GPIO_TRIGGER, GPIO.LOW)
     StartTime = time.time()
     StopTime = time.time()
     print ("Waiting for first echo value")
     # save StartTime
-    while GPIO.input(GPIO_ECHO) == 0:
-        StartTime = time.time()
+    while True:
+            StartTime = time.time()
+            if GPIO.input(GPIO_ECHO) == GPIO.HIGH:
+                break
     print ("Waiting for last echo value")
     # save time of arrival
-    while GPIO.input(GPIO_ECHO) == 1:
-        StopTime = time.time()
+    while True:
+            StopTime = time.time()
+            if GPIO.input(GPIO_ECHO) == GPIO.LOW:
+                break
     print ("Waiting echo value received")
     # time difference between start and arrival
     TimeElapsed = StopTime - StartTime
@@ -46,11 +47,12 @@ def distance():
  
 if __name__ == '__main__':
     print("Let's start LedStorm project. You can stop this process by pressing CTRL + C")
+    GPIO.output(GPIO_TRIGGER, GPIO.LOW)
     try:
         while True:
+            time.sleep(0.5)
             dist = distance()
             print ("Measured Distance = %.1f cm" % dist)
-            time.sleep(0.1)
  
     except KeyboardInterrupt:
         print("LedStorm closed by pressing CTRL + C")
