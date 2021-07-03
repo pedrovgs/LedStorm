@@ -4,10 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = "*"
 "rpi.gpio" = "*"
 
 [dev-packages]
+pylint = "*"
+autopep8 = "*"
 
 [requires]
-python_version = "3.7.3"
+python_version = "3.9"
