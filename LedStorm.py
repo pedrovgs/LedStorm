@@ -51,7 +51,7 @@ if __name__ == '__main__':
         while True:
             dist = distance()
             print ("Measured Distance = %.1f cm" % dist)
-            time.sleep(1)
+            time.sleep(0.1)
  
     except KeyboardInterrupt:
         print("LedStorm closed by pressing CTRL + C")
