@@ -1,8 +1,5 @@
 #Libraries
-if app.env == 'development':
-    import FakeRPi.GPIO as GPIO
-else:
-    import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import time
  
 #GPIO Mode (BOARD / BCM)
