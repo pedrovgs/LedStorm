@@ -1,6 +1,6 @@
 import time
 from proximity_sensor import measure_distance_from_sensor
-from led_stripe import trigger_lightning
+from led_strip import trigger_lightning
 
 
 MIN_DISTANCE_TO_TRIGGER_LIGHTNING = 50
