@@ -1,17 +1,20 @@
 import RPi.GPIO as GPIO
 import time
-
+ 
+pin = 21
+interval = 1
+ 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-GPIO.setup(18,GPIO.OUT)
+GPIO.setup(pin, GPIO.OUT)
 
 def blink():
-    time.sleep(1)
     print ("LED on")
-    GPIO.output(18,GPIO.HIGH)
-    time.sleep(1)
+    GPIO.output(pin, GPIO.HIGH)
+    time.sleep(interval)
     print ("LED off")
-    GPIO.output(18,GPIO.LOW)
+    GPIO.output(pin, GPIO.LOW)
+    time.sleep(interval)
 
 
 if __name__ == '__main__':
