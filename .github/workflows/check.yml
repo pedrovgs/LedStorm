@@ -12,8 +12,6 @@ jobs:
     - name: Install pipenv
       run: |
         python -m pip install --upgrade pipenv wheel
-    - name: Configure python version
-      run: pipenv install --python=3.7.10
     - name: Install dependencies
       run: pipenv install
     - name: Lint
