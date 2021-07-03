@@ -15,17 +15,13 @@ GPIO.setup(GPIO_ECHO, GPIO.IN)
  
 def distance():
     print ("Starting measure process")
-    # set Trigger to LOW
-    GPIO.output(GPIO_TRIGGER, False)
-    print ("Trigger pin set to false")
-    time.sleep(0.00002)
     # set Trigger to HIGH
+    print ("Setting trigger to true")
     GPIO.output(GPIO_TRIGGER, True)
-    print ("Trigger pin set to true")
-    # set Trigger after 0.05ms to LOW
-    time.sleep(0.00005)
+    # set Trigger after 0.00001 = 0.01ms to LOW
+    time.sleep(1)
+    print ("Setting trigger to false")
     GPIO.output(GPIO_TRIGGER, False)
-    print ("Trigger pin set to false")
     StartTime = time.time()
     StopTime = time.time()
     print ("Waiting for first echo value")
