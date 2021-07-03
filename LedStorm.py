@@ -30,12 +30,10 @@ def distance():
     print ("Waiting for first echo value")
     # save StartTime
     while GPIO.input(GPIO_ECHO) == 0:
-        print (GPIO.input(GPIO_ECHO))
         StartTime = time.time()
     print ("Waiting for last echo value")
     # save time of arrival
     while GPIO.input(GPIO_ECHO) == 1:
-        print (GPIO.input(GPIO_ECHO))
         StopTime = time.time()
     print ("Waiting echo value received")
     # time difference between start and arrival
