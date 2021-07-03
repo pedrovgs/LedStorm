@@ -1,12 +1,10 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "199b5fb1997b3b8bab5698ef85ed61e669d14b83a9186e79141f4c57e7be159f"
+            "sha256": "a0fa735f153929d445431a3a3b10c1040eed52183c46770256887a7af6478e16"
         },
         "pipfile-spec": 6,
-        "requires": {
-            "python_version": "3.9"
-        },
+        "requires": {},
         "sources": [
             {
                 "name": "pypi",
@@ -15,7 +13,16 @@
             }
         ]
     },
-    "default": {},
+    "default": {
+        "rpi": {
+            "gpio": "*",
+            "hashes": [
+                "sha256:e04e3f422a6a2c0a9ce4c0df8d2cb71263d5400089fdb9a5ac19406950c6c748"
+            ],
+            "index": "pypi",
+            "version": "==0.0.1"
+        }
+    },
     "develop": {
         "astroid": {
             "hashes": [
