@@ -15,4 +15,4 @@ jobs:
     - name: Install dependencies
       run: pipenv install --dev
     - name: Lint
-      run: pipenv run pylint **/*.py
+      run: pipenv run pylint *.py
