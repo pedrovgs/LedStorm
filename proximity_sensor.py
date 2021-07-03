@@ -34,8 +34,8 @@ def read_distance_using_time_elapsed_between_echos():
     while GPIO.input(GPIO_ECHO) == 1:
         stop_time = time.time()
 
-    timeElapsed = stop_time - start_time
+    time_elapsed = stop_time - start_time
     # multiply with the sonic speed (34300 cm/s)
     # and divide by 2, because there and back
-    distance = (timeElapsed * 34300) / 2
+    distance = (time_elapsed * 34300) / 2
     return distance
