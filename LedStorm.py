@@ -10,7 +10,6 @@ if __name__ == '__main__':
     try:
         while True:
             distance = measureDistanceFromSensor()
-            print ("Measured Distance = %.1f cm" % dist)
             if (distance < 50):
                 triggerLightning()
                 time.sleep(SLEEP_TIME_AFTER_LIGHTNING)
