@@ -13,35 +13,30 @@ GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
 GPIO.setup(GPIO_ECHO, GPIO.IN)
  
 def distance():
-    print ("Starting measure")
     # set Trigger to HIGH
-    print ("Setting trigger to true")
     GPIO.output(GPIO_TRIGGER, True)
-    # set Trigger after 0.00001 = 0.01ms to LOW
+ 
+    # set Trigger after 0.01ms to LOW
     time.sleep(0.00001)
-    print ("Setting trigger to false")
     GPIO.output(GPIO_TRIGGER, False)
+ 
     StartTime = time.time()
     StopTime = time.time()
-    print ("Waiting for first echo value")
+ 
     # save StartTime
-    while True:
-            StartTime = time.time()
-            if GPIO.input(GPIO_ECHO) == GPIO.HIGH:
-                break
-    print ("Waiting for last echo value")
+    while GPIO.input(GPIO_ECHO) == 0:
+        StartTime = time.time()
+ 
     # save time of arrival
-    while True:
-            StopTime = time.time()
-            if GPIO.input(GPIO_ECHO) == GPIO.LOW:
-                break
-    print ("Waiting echo value received")
+    while GPIO.input(GPIO_ECHO) == 1:
+        StopTime = time.time()
+ 
     # time difference between start and arrival
     TimeElapsed = StopTime - StartTime
     # multiply with the sonic speed (34300 cm/s)
     # and divide by 2, because there and back
     distance = (TimeElapsed * 34300) / 2
-    print ("Meassure process finished with distance = %.1f cm" % distance)
+ 
     return distance
  
 if __name__ == '__main__':
