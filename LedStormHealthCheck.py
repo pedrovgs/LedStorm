@@ -6,11 +6,11 @@ GPIO.setwarnings(False)
 GPIO.setup(18,GPIO.OUT)
 
 def blink():
+    time.sleep(1)
     print ("LED on")
-    time.sleep(1)
     GPIO.output(18,GPIO.HIGH)
-    print ("LED off")
     time.sleep(1)
+    print ("LED off")
     GPIO.output(18,GPIO.LOW)
 
 
