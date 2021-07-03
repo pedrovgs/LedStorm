@@ -14,6 +14,7 @@ GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
 GPIO.setup(GPIO_ECHO, GPIO.IN)
  
 def distance():
+    print ("Starting measure process")
     # set Trigger to HIGH
     GPIO.output(GPIO_TRIGGER, True)
  
@@ -37,17 +38,17 @@ def distance():
     # multiply with the sonic speed (34300 cm/s)
     # and divide by 2, because there and back
     distance = (TimeElapsed * 34300) / 2
- 
+    print ("Meassure process finished")
     return distance
  
 if __name__ == '__main__':
+    print("Let's start LedStorm project. You can stop this process by pressing CTRL + C")
     try:
         while True:
             dist = distance()
             print ("Measured Distance = %.1f cm" % dist)
             time.sleep(1)
  
-        # Reset by pressing CTRL + C
     except KeyboardInterrupt:
-        print("Measurement stopped by User")
+        print("LedStorm closed by pressing CTRL + C")
         GPIO.cleanup()
