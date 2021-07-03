@@ -1,0 +1,13 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+rpi = {gpio = "*"}
+
+[dev-packages]
+pylint = "*"
+autopep8 = "*"
+pytest = "*"
+pytest-mock = "*"
