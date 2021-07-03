@@ -17,6 +17,8 @@ jobs:
       with:
         path: ~/.local/share/virtualenvs
         key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
+    - name: Configure python version
+      run: pipenv install --python=3.7.10
     - name: Install dependencies
       if: steps.cache-pipenv.outputs.cache-hit != 'true'
       run: pipenv install
