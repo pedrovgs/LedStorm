@@ -6,8 +6,8 @@ import time
 GPIO.setmode(GPIO.BCM)
  
 #set GPIO Pins
-GPIO_TRIGGER = 5
-GPIO_ECHO = 6
+GPIO_TRIGGER = 10
+GPIO_ECHO = 12
  
 #set GPIO direction (IN / OUT)
 GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
@@ -17,11 +17,11 @@ def distance():
     print ("Starting measure")
     # set Trigger to HIGH
     print ("Setting trigger to true")
-    GPIO.output(GPIO_TRIGGER, GPIO.HIGH)
+    GPIO.output(GPIO_TRIGGER, True)
     # set Trigger after 0.00001 = 0.01ms to LOW
     time.sleep(0.00001)
     print ("Setting trigger to false")
-    GPIO.output(GPIO_TRIGGER, GPIO.LOW)
+    GPIO.output(GPIO_TRIGGER, False)
     StartTime = time.time()
     StopTime = time.time()
     print ("Waiting for first echo value")
@@ -47,7 +47,7 @@ def distance():
  
 if __name__ == '__main__':
     print("Let's start LedStorm project. You can stop this process by pressing CTRL + C")
-    GPIO.output(GPIO_TRIGGER, GPIO.LOW)
+    GPIO.output(GPIO_TRIGGER, True)
     try:
         while True:
             time.sleep(0.5)
