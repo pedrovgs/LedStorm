@@ -2,6 +2,7 @@ from ProximitySensor import measureDistanceFromSensor
 from LedStrip import triggerLightning
 import time
 
+MIN_DISTANCE_TO_TRIGGER_LIGHTNING = 50
 SLEEP_TIME_AFTER_LIGHTNING = 3
 SLEEP_TIME_WITHOUT_LIGHTNING = 0.25
  
@@ -10,7 +11,7 @@ if __name__ == '__main__':
     try:
         while True:
             distance = measureDistanceFromSensor()
-            if (distance < 50):
+            if (distance < MIN_DISTANCE_TO_TRIGGER_LIGHTNING):
                 triggerLightning()
                 time.sleep(SLEEP_TIME_AFTER_LIGHTNING)
             else:
