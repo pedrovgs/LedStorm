@@ -6,8 +6,8 @@ import time
 GPIO.setmode(GPIO.BCM)
  
 #set GPIO Pins
-GPIO_TRIGGER = 19
-GPIO_ECHO = 26
+GPIO_TRIGGER = 5
+GPIO_ECHO = 6
  
 #set GPIO direction (IN / OUT)
 GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
@@ -17,6 +17,7 @@ def distance():
     print ("Starting measure process")
     # set Trigger to LOW
     GPIO.output(GPIO_TRIGGER, False)
+    print ("Trigger pin set to false")
     time.sleep(0.00002)
     # set Trigger to HIGH
     GPIO.output(GPIO_TRIGGER, True)
