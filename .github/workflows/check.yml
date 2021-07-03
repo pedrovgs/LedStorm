@@ -16,3 +16,5 @@ jobs:
       run: pipenv install --dev
     - name: Lint
       run: pipenv run pylint *.py
+    - name: Test
+      run: pipenv run py.test

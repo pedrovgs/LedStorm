@@ -1,14 +1,12 @@
 import time
-from RPi import GPIO
-
-GPIO.setmode(GPIO.BOARD)
+try:
+    from RPi import GPIO
+    GPIO.setmode(GPIO.BOARD)
+except ImportError:
+    print ("Error found importing RPi mo")
 
 GPIO_TRIGGER = 10
 GPIO_ECHO = 12
-
-GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
-GPIO.setup(GPIO_ECHO, GPIO.IN)
-
 
 def measure_distance_from_sensor():
     print("Requesting distance measure")
@@ -19,6 +17,8 @@ def measure_distance_from_sensor():
 
 
 def trigger_distance_measure_signal():
+    GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
+    GPIO.setup(GPIO_ECHO, GPIO.IN)
     GPIO.output(GPIO_TRIGGER, True)
     time.sleep(0.00001)
     GPIO.output(GPIO_TRIGGER, False)
