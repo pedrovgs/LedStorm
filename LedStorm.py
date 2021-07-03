@@ -38,7 +38,7 @@ def distance():
     # multiply with the sonic speed (34300 cm/s)
     # and divide by 2, because there and back
     distance = (TimeElapsed * 34300) / 2
-    print ("Meassure process finished with distance = %.1f cm" % dist)
+    print ("Meassure process finished with distance = %.1f cm" % distance)
     return distance
  
 if __name__ == '__main__':
