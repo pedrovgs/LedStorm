@@ -8,11 +8,11 @@ SLEEP_TIME_AFTER_LIGHTNING = 1
 SLEEP_TIME_WITHOUT_LIGHTNING = 0.25
 
 
-def show_lightning_if_needed(strip):
+def show_lightning_if_needed(led_strip):
     distance = measure_distance_from_sensor()
     distance_is_too_close = 0 <= distance <= MIN_DISTANCE_TO_TRIGGER_LIGHTNING
     if distance_is_too_close:
-        trigger_lightning(strip)
+        trigger_lightning(led_strip)
     return distance_is_too_close
 
 

@@ -3,10 +3,11 @@ try:
     from RPi import GPIO
     GPIO.setmode(GPIO.BOARD)
 except ImportError:
-    print ("Error found importing RPi mo")
+    print("Error found importing RPi mo")
 
 GPIO_TRIGGER = 16
 GPIO_ECHO = 18
+
 
 def measure_distance_from_sensor():
     print("Requesting distance measure")
