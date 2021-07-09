@@ -14,7 +14,7 @@ LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
 # True to invert the signal (when using NPN transistor level shift)
 LED_INVERT = False
 LED_CHANNEL = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
-
+DEFAULT_COLOR = Color(196, 234, 252)
 
 def initialize():
     print("Initializing led stripe")
@@ -30,9 +30,8 @@ def initialize():
     return strip
 
 
-def trigger_lightning(strip):
+def trigger_lightning(strip, color = DEFAULT_COLOR):
     print("Let's make some noise!")
-    color = Color(196, 234, 252)
     color_thunder(strip, color)
     blink(strip, color)
     turn_off(strip)
