@@ -59,8 +59,9 @@ def trigger_lightning(lightnings):
     print("Lightning request accomplished")
 
 def show_lightning(strip, color):
-    color_thunder(strip, color)
-    blink(strip, color)
+    adafruitColor = Color(color.red, color.green, color.blue)
+    color_thunder(strip, adafruitColor)
+    blink(strip, adafruitColor)
     turn_off(strip)
     return "Lightning shown!"
 
@@ -68,7 +69,7 @@ def color_thunder(strip, color):
     print("Starting color thunder")
     wait = 1
     for i in range(strip.numPixels()):
-        strip.setPixelColor(i, Color(color.red, color.green, color.blue))
+        strip.setPixelColor(i, color)
         strip.show()
         time.sleep(wait / 10000.0)
         wait = wait + 2
