@@ -1,4 +1,5 @@
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 try:
     from rpi_ws281x import Color, Adafruit_NeoPixel
 except ImportError:
@@ -46,12 +47,20 @@ def initialize():
 
 
 def trigger_lightning(stripes, color = DEFAULT_COLOR):
+    pool = ThreadPoolExecutor(len(stripes))
+    futures = []
     print("Let's make some noise!")
     for strip in stripes:
-        color_thunder(strip, color)
-        blink(strip, color)
-        turn_off(strip)
+        future = pool.submit(show_lightning, strip, color)
+        futures.append(future)
+    for x in as_completed(futures):
+        print(x.result())
 
+def show_lightning(strip, color):
+    color_thunder(strip, color)
+    blink(strip, color)
+    turn_off(strip)
+    return "Lightning shown!"
 
 def color_thunder(strip, color):
     print("Starting color thunder")
