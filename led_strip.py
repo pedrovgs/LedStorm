@@ -30,7 +30,7 @@ def initialize():
         LED_CHANNEL_1)
     strip1.begin()
     print("Led strip 1 intialized")
-    time.sleep(1)
+    time.sleep(1) # Needed to ensure both leds are initialized properly
     print("Initializing led strip 2")
     strip2 = Adafruit_NeoPixel(
         LED_COUNT,
@@ -41,6 +41,7 @@ def initialize():
         LED_BRIGHTNESS,
         LED_CHANNEL_2)
     strip2.begin()
+    print("Led strip 2 intialized")
     return [strip1, strip2]
 
 
