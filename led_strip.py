@@ -54,8 +54,8 @@ def trigger_lightning(lightnings):
         future = pool.submit(show_lightning, lightning.strip, lightning.color)
         futures.append(future)
     print("Waitining for lightnings to be done")
-    for future in as_completed(futures):
-        print(future.result())
+    for waitingFuture in as_completed(futures):
+        print(waitingFuture.result())
     print("Lightning request accomplished")
 
 def show_lightning(strip, color):
