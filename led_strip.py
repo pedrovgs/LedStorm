@@ -1,4 +1,5 @@
 import time
+import random
 from concurrent.futures import ThreadPoolExecutor, as_completed
 try:
     from rpi_ws281x import Color, Adafruit_NeoPixel
@@ -60,6 +61,8 @@ def trigger_lightning(lightnings):
 
 def show_lightning(strip, color):
     adafruitColor = Color(color.red, color.green, color.blue)
+    # Wait a random amount of time before showing the lightning
+    time.sleep(random.uniform(0.0, 1.5))
     color_thunder(strip, adafruitColor)
     blink(strip, adafruitColor)
     turn_off(strip)
