@@ -63,10 +63,29 @@ def show_lightning(strip, color):
     adafruitColor = Color(color.red, color.green, color.blue)
     # Wait a random amount of time before showing the lightning
     time.sleep(random.uniform(0.0, 1.5))
-    color_thunder(strip, adafruitColor)
-    blink(strip, adafruitColor)
-    turn_off(strip)
+    lightning_type = random.randint(0, 2)
+    if (lightning_type == 0):
+        show_lightning_model_1(strip, adafruitColor)
+    elif (lightning_type == 1):
+        show_lightning_model_2(strip, adafruitColor)
+    else:
+        show_lightning_model_3(strip, adafruitColor)
     return "Lightning shown!"
+
+def show_lightning_model_1(strip, color):
+    color_thunder(strip, color)
+    blink(strip, color)
+    turn_off(strip)
+
+def show_lightning_model_2(strip, color):
+    color_thunder(strip, color)
+    time.sleep(0.25)
+    turn_off(strip)
+
+def show_lightning_model_3(strip, color):
+    blink(strip, color)
+    time.sleep(0.25)
+    turn_off(strip)
 
 def color_thunder(strip, color):
     print("Starting color thunder")
