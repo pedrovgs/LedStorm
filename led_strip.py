@@ -31,7 +31,7 @@ def initialize():
     strip1.begin()
     strip2 = Adafruit_NeoPixel(
         LED_COUNT,
-        LED_PIN_1,
+        LED_PIN_2,
         LED_FREQ_HZ,
         LED_DMA,
         LED_INVERT,
