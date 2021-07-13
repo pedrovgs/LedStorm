@@ -46,15 +46,17 @@ def initialize():
     return [strip1, strip2]
 
 
-def trigger_lightning(stripes, color = DEFAULT_COLOR):
-    pool = ThreadPoolExecutor(len(stripes))
+def trigger_lightning(lightnings):
+    pool = ThreadPoolExecutor(len(lightnings))
     futures = []
     print("Let's make some noise!")
-    for strip in stripes:
-        future = pool.submit(show_lightning, strip, color)
+    for lightning in lightnings:
+        future = pool.submit(show_lightning, lightning.strip, lightning.color)
         futures.append(future)
-    for x in as_completed(futures):
-        print(x.result())
+    print("Waitining for lightnings to be done")
+    for future in as_completed(futures):
+        print(future.result())
+    print("Lightning request accomplished")
 
 def show_lightning(strip, color):
     color_thunder(strip, color)
@@ -66,7 +68,7 @@ def color_thunder(strip, color):
     print("Starting color thunder")
     wait = 1
     for i in range(strip.numPixels()):
-        strip.setPixelColor(i, color)
+        strip.setPixelColor(i, Color(color.red, color.green, color.blue))
         strip.show()
         time.sleep(wait / 10000.0)
         wait = wait + 2

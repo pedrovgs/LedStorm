@@ -1,6 +1,6 @@
 import time
 from led_strip import initialize, trigger_lightning
-from rpi_ws281x import Color
+from model import Color, Lightning
 from flask import Flask, request, jsonify
 
 print("Let's start LedStorm server. You can stop this process by pressing CTRL + C")
@@ -14,9 +14,15 @@ app = Flask(__name__)
 def hello_world():
     body = request.json
     print ("Lightning request received with data = %s", body)
-    lightning = body["lightnings"][0] 
-    color = Color(lightning["r"], lightning["g"], lightning["b"])
-    trigger_lightning(stripes, color)
+    lightnings = []
+    index = 0
+    for lightningRequest in body["lightnings"]:
+        color = Color(lightningRequest["r"], lightningRequest["g"], lightningRequest["b"])
+        lightning = Lightning(stripes[index], color)
+        lightnings.append(lightning)
+        index = index + 1
+    
+    trigger_lightning(lightnings)
     return 'First the lightning, now the thunder!'
 
 app.run(host='0.0.0.0', port=80)
