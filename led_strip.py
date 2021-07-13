@@ -6,20 +6,20 @@ except ImportError:
 
 
 # LED strip configuration:
-LED_COUNT = 50      # Number of LED pixels.
-LED_FREQ_HZ = 800000  # LED signal frequency in hertz (usually 800khz)
-LED_DMA = 10      # DMA channel to use for generating signal (try 10)
-LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
-# True to invert the signal (when using NPN transistor level shift)
-LED_INVERT = False
-LED_PIN_1 = 18
-LED_CHANNEL_1 = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
-LED_PIN_2 = 19
-LED_CHANNEL_2 = 1       # set to '1' for GPIOs 18, etc
+LED_COUNT = 50          # Number of LED pixels.
+LED_FREQ_HZ = 800000    # LED signal frequency in hertz
+LED_DMA = 10            # DMA channel to use for generating signal
+LED_BRIGHTNESS = 255    # Set to 0 for darkest and 255 for brightest
+LED_INVERT = False      # True to invert the signal
+LED_PIN_1 = 18          # GPIO pin 18
+LED_CHANNEL_1 = 0       # set to '0' for GPIOs 18, etc.
+LED_PIN_2 = 19          # GPIO pin 19
+LED_CHANNEL_2 = 1       # set to '1' for GPIOs 19, etc.
+
 DEFAULT_COLOR = Color(196, 234, 252)
 
 def initialize():
-    print("Initializing led stripe")
+    print("Initializing led strip 1")
     strip1 = Adafruit_NeoPixel(
         LED_COUNT,
         LED_PIN_1,
@@ -29,6 +29,9 @@ def initialize():
         LED_BRIGHTNESS,
         LED_CHANNEL_1)
     strip1.begin()
+    print("Led strip 1 intialized")
+    time.sleep(1)
+    print("Initializing led strip 2")
     strip2 = Adafruit_NeoPixel(
         LED_COUNT,
         LED_PIN_2,
