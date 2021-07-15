@@ -14,8 +14,8 @@ def show_lightning_if_needed(stripes):
     distance_is_too_close = 0 <= distance <= MIN_DISTANCE_TO_TRIGGER_LIGHTNING
     if distance_is_too_close:
         lightnings = []
-    for strip in stripes:
-        lightnings.append(Lightning(strip, Color(255, 255, 255)))
+        for strip in stripes:
+            lightnings.append(Lightning(strip, Color(255, 255, 255)))
         trigger_lightning(lightnings)
     return distance_is_too_close
 
