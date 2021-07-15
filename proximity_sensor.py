@@ -5,7 +5,7 @@ try:
 except ImportError:
     print("Error found importing RPi mo")
 
-GPIO_TRIGGER = 16
+GPIO_TRIGGER = 37
 GPIO_ECHO = 18
 
 
