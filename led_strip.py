@@ -18,9 +18,6 @@ LED_CHANNEL_1 = 0       # set to '0' for GPIOs 18, etc.
 LED_PIN_2 = 19          # GPIO pin 19
 LED_CHANNEL_2 = 1       # set to '1' for GPIOs 19, etc.
 
-DEFAULT_COLOR = Color(196, 234, 252)
-
-
 def initialize():
     print("Initializing led strip 1")
     strip1 = Adafruit_NeoPixel(
@@ -49,29 +46,29 @@ def initialize():
 
 
 def trigger_lightning(lightnings):
-    pool = ThreadPoolExecutor(len(lightnings))
-    futures = []
-    print("Let's make some noise!")
-    for lightning in lightnings:
-        future = pool.submit(show_lightning, lightning.strip, lightning.color)
-        futures.append(future)
-    print("Waitining for lightnings to be done")
-    for waitingFuture in as_completed(futures):
-        print(waitingFuture.result())
-    print("Lightning request accomplished")
+    with ThreadPoolExecutor(len(lightnings)) as pool:
+        futures = []
+        print("Let's make some noise!")
+        for lightning in lightnings:
+            future = pool.submit(show_lightning, lightning.strip, lightning.color)
+            futures.append(future)
+        print("Waitining for lightnings to be done")
+        for waiting_future in as_completed(futures):
+            print(waiting_future.result())
+        print("Lightning request accomplished")
 
 
 def show_lightning(strip, color):
-    adafruitColor = Color(color.red, color.green, color.blue)
+    adafruit_color = Color(color.red, color.green, color.blue)
     # Wait a random amount of time before showing the lightning
     time.sleep(random.uniform(0.0, 1.5))
     lightning_type = random.randint(0, 2)
-    if (lightning_type == 0):
-        show_lightning_model_1(strip, adafruitColor)
-    elif (lightning_type == 1):
-        show_lightning_model_2(strip, adafruitColor)
+    if lightning_type == 0:
+        show_lightning_model_1(strip, adafruit_color)
+    elif lightning_type == 1:
+        show_lightning_model_2(strip, adafruit_color)
     else:
-        show_lightning_model_3(strip, adafruitColor)
+        show_lightning_model_3(strip, adafruit_color)
     return "Lightning shown!"
 
 

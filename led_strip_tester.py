@@ -1,5 +1,5 @@
-from model import Lightning, Color
 import time
+from model import Lightning, Color
 from led_strip import initialize, trigger_lightning
 
 
