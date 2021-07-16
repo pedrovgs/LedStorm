@@ -5,9 +5,7 @@ from model import Color, Lightning
 
 
 MIN_DISTANCE_TO_TRIGGER_LIGHTNING = 50
-SLEEP_TIME_AFTER_LIGHTNING = 1
-SLEEP_TIME_WITHOUT_LIGHTNING = 0.25
-
+SLEEP_TIME_BETWEEN_READS = 1
 
 def show_lightning_if_needed(stripes):
     distance = measure_distance_from_sensor()
@@ -26,8 +24,7 @@ if __name__ == "__main__":
     try:
         while True:
             if show_lightning_if_needed(stripes):
-                time.sleep(SLEEP_TIME_AFTER_LIGHTNING)
-            else:
-                time.sleep(SLEEP_TIME_WITHOUT_LIGHTNING)
+                print ("Thunder shown! -------->------>------>")
+            time.sleep(SLEEP_TIME_BETWEEN_READS)
     except KeyboardInterrupt:
         print("LedStorm closed by pressing CTRL + C")

@@ -5,8 +5,8 @@ try:
 except ImportError:
     print("Error found importing RPi mo")
 
-GPIO_TRIGGER = 37
-GPIO_ECHO = 18
+GPIO_TRIGGER = 8
+GPIO_ECHO = 10
 
 
 def measure_distance_from_sensor():
@@ -21,24 +21,19 @@ def trigger_distance_measure_signal():
     GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
     GPIO.setup(GPIO_ECHO, GPIO.IN)
     GPIO.output(GPIO_TRIGGER, True)
-    time.sleep(0.01)
+    time.sleep(0.00001)
     GPIO.output(GPIO_TRIGGER, False)
 
 
 def read_distance_using_time_elapsed_between_echos():
     start_time = time.time()
     stop_time = time.time()
-    start_read_time = time.time()
+    print("Starting distance read")
     while GPIO.input(GPIO_ECHO) == 0:
-        if time.time() - start_read_time > 1:
-            print ("Sensor took too long to get 0 in the echo pin. Current value %.1i", GPIO.input(GPIO_ECHO))
-            break
+        start_time = time.time()
 
-    start_read_time = time.time()
     while GPIO.input(GPIO_ECHO) == 1:
-        if time.time() - start_read_time > 1:
-            print ("Sensor took too long to get 1 in the echo pin. Current value %.1i", GPIO.input(GPIO_ECHO))
-            break
+        stop_time = time.time()
 
     time_elapsed = stop_time - start_time
     # multiply with the sonic speed (34300 cm/s)
