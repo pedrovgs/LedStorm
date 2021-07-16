@@ -9,7 +9,7 @@ SLEEP_TIME_BETWEEN_READS = 1
 
 def show_lightning_if_needed(stripes):
     distance = measure_distance_from_sensor()
-    distance_is_too_close = 0 <= distance <= MIN_DISTANCE_TO_TRIGGER_LIGHTNING
+    distance_is_too_close = distance <= MIN_DISTANCE_TO_TRIGGER_LIGHTNING
     if distance_is_too_close:
         lightnings = []
         for strip in stripes:
