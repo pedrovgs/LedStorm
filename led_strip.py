@@ -20,6 +20,7 @@ LED_CHANNEL_2 = 1       # set to '1' for GPIOs 19, etc.
 
 DEFAULT_COLOR = Color(196, 234, 252)
 
+
 def initialize():
     print("Initializing led strip 1")
     strip1 = Adafruit_NeoPixel(
@@ -32,7 +33,7 @@ def initialize():
         LED_CHANNEL_1)
     strip1.begin()
     print("Led strip 1 intialized")
-    time.sleep(1) # Needed to ensure both leds are initialized properly
+    time.sleep(1)  # Needed to ensure both leds are initialized properly
     print("Initializing led strip 2")
     strip2 = Adafruit_NeoPixel(
         LED_COUNT,
@@ -59,6 +60,7 @@ def trigger_lightning(lightnings):
         print(waitingFuture.result())
     print("Lightning request accomplished")
 
+
 def show_lightning(strip, color):
     adafruitColor = Color(color.red, color.green, color.blue)
     # Wait a random amount of time before showing the lightning
@@ -72,20 +74,24 @@ def show_lightning(strip, color):
         show_lightning_model_3(strip, adafruitColor)
     return "Lightning shown!"
 
+
 def show_lightning_model_1(strip, color):
     color_thunder(strip, color)
     blink(strip, color)
     turn_off(strip)
+
 
 def show_lightning_model_2(strip, color):
     color_thunder(strip, color)
     time.sleep(0.25)
     turn_off(strip)
 
+
 def show_lightning_model_3(strip, color):
     blink(strip, color)
     time.sleep(0.25)
     turn_off(strip)
+
 
 def color_thunder(strip, color):
     print("Starting color thunder")
