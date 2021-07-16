@@ -18,6 +18,7 @@ LED_CHANNEL_1 = 0       # set to '0' for GPIOs 18, etc.
 LED_PIN_2 = 19          # GPIO pin 19
 LED_CHANNEL_2 = 1       # set to '1' for GPIOs 19, etc.
 
+
 def initialize():
     print("Initializing led strip 1")
     strip1 = Adafruit_NeoPixel(
@@ -50,7 +51,10 @@ def trigger_lightning(lightnings):
         futures = []
         print("Let's make some noise!")
         for lightning in lightnings:
-            future = pool.submit(show_lightning, lightning.strip, lightning.color)
+            future = pool.submit(
+                show_lightning,
+                lightning.strip,
+                lightning.color)
             futures.append(future)
         print("Waitining for lightnings to be done")
         for waiting_future in as_completed(futures):
