@@ -29,11 +29,17 @@ def read_distance_using_time_elapsed_between_echos():
     start_time = time.time()
     stop_time = time.time()
     print("Starting distance read")
+    start_read_time = time.time()
     while GPIO.input(GPIO_ECHO) == 0:
         start_time = time.time()
+        if (time.time() - start_read_time > 1):
+            break
 
+    start_read_time = time.time()
     while GPIO.input(GPIO_ECHO) == 1:
         stop_time = time.time()
+        if (time.time() - start_read_time > 1):
+            break
 
     time_elapsed = stop_time - start_time
     # multiply with the sonic speed (34300 cm/s)
