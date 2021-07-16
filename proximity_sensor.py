@@ -5,8 +5,8 @@ try:
 except ImportError:
     print("Error found importing RPi mo")
 
-GPIO_TRIGGER = 8
-GPIO_ECHO = 10
+GPIO_TRIGGER = 10
+GPIO_ECHO = 8
 
 
 def measure_distance_from_sensor():
