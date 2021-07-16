@@ -21,19 +21,28 @@ def trigger_distance_measure_signal():
     GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
     GPIO.setup(GPIO_ECHO, GPIO.IN)
     GPIO.output(GPIO_TRIGGER, True)
-    time.sleep(0.00001)
+    time.sleep(0.01)
     GPIO.output(GPIO_TRIGGER, False)
+    time.sleep(0.01)
 
 
 def read_distance_using_time_elapsed_between_echos():
     start_time = time.time()
     stop_time = time.time()
     print("Starting distance read")
+    start_read_time = time.time()
     while GPIO.input(GPIO_ECHO) == 0:
         start_time = time.time()
+        if start_read_time > 1:
+            print ("Sensor took too long to get 0 in the echo pin. Current value %.1i", GPIO.input(GPIO_ECHO))
+            break
 
+    start_read_time = time.time()
     while GPIO.input(GPIO_ECHO) == 1:
         stop_time = time.time()
+        if start_read_time > 1:
+            print ("Sensor took too long to get 1 in the echo pin. Current value %.1i", GPIO.input(GPIO_ECHO))
+            break
 
     time_elapsed = stop_time - start_time
     # multiply with the sonic speed (34300 cm/s)
