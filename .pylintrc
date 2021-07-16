@@ -1,2 +1,2 @@
 [MASTER]
-disable=C0114, C0116, E0401 # missing-X-docstring, 
+disable=C0114, C0116, E0401, C0115 # missing-X-docstring, 

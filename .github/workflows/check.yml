@@ -17,4 +17,4 @@ jobs:
     - name: Lint
       run: pipenv run pylint *.py
     - name: Test
-      run: pipenv run py.test
+      run: pipenv run py.test -v
