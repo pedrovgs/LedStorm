@@ -1,3 +1,5 @@
+import Foundation
+import JavaScriptKit
 import TokamakDOM
 
 struct LedStormApp: App {
@@ -15,7 +17,7 @@ struct LedStormView: View {
       Spacer()
       Button(
         action: {
-          print("CLICK")
+          sendLightningRequest()
         },
         label: {
           Text("⚡️").font(.system(size: 160))
@@ -34,7 +36,25 @@ struct TransparentButtonStyle: ButtonStyle {
 }
 
 extension Color {
-  static let buttonPressed = Color(red: 1.0, green: 1.0, blue: 1.0, opacity: 1.0)
+  static let buttonPressed = Color(red: 0.29, green: 0.29, blue: 0.29, opacity: 1.0)
 }
 
 LedStormApp.main()
+
+private func sendLightningRequest() {
+  print("CLICK")
+  let url = "http://raspberrypi.local"
+  let fetchPromise: JSPromise = fetch(url)
+  fetchPromise.then { value -> String in
+    print("Value = \(value)")
+    return ""
+  } failure: { error -> String in
+    print("Value = \(error)")
+    return ""
+  }
+}
+
+func fetch(_ url: String) -> JSPromise {
+  let _jsFetch = JSObject.global.fetch.function!
+  return JSPromise(_jsFetch(url).object!)!
+}
