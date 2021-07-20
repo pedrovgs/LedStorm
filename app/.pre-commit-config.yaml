@@ -14,4 +14,5 @@ repos:
   - repo: https://github.com/hodovani/pre-commit-swift
     rev: master
     hooks:
+      - id: swift-lint
       - id: swift-format
