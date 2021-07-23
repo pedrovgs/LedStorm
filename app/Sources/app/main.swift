@@ -44,17 +44,44 @@ LedStormApp.main()
 private func sendLightningRequest() {
   print("CLICK")
   let url = "http://raspberrypi.local"
-  let fetchPromise: JSPromise = fetch(url)
+  let lightning1 = ["r": 255, "g": 255, "b": 255].jsValue()
+  let lightning2 = ["r": 255, "g": 255, "b": 255].jsValue()
+  let body: [String: ConvertibleToJSValue] = ["lightnings": [lightning1, lightning2]]
+  let fetchPromise: JSPromise = fetch(url, body)
   fetchPromise.then { value -> String in
     print("Value = \(value)")
     return ""
   } failure: { error -> String in
-    print("Value = \(error)")
+    print("Error = \(error)")
     return ""
   }
 }
 
-func fetch(_ url: String) -> JSPromise {
+func fetch(_ url: String, _ body: RequestBody) -> JSPromise {
   let _jsFetch = JSObject.global.fetch.function!
-  return JSPromise(_jsFetch(url).object!)!
+  let headers = JSObject.global
+  headers["Content-Type"] = "application/json"
+  let requestData = JSObject.global
+  requestData["method"] = "POST"
+  requestData["headers"] = ["Content-Type": "application/json"].jsValue()
+  requestData["body"] = """
+  {
+      "lightnings": [
+          {
+              "r": 255,
+              "g": 255,
+              "b": 255
+          },
+          {
+              "r": 255,
+              "g": 213,
+              "b": 255
+          }
+      ]
+  }
+  """
+  print(requestData)
+  return JSPromise(_jsFetch(url, requestData).object!)!
 }
+
+typealias RequestBody = [String: ConvertibleToJSValue]
