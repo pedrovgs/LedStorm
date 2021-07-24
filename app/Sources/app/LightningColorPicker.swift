@@ -2,21 +2,31 @@ import TokamakDOM
 
 struct LightningColorPicker: View {
   let lightningNumber: Int
+  let selectedColor: Color
+  let onColorSelected: (Color) -> ()
   var body: some View {
     VStack {
       HStack {
+        Spacer().frame(width: 16)
         ForEach(colors, id: \.self) { color in
           VStack {
             Button(action: {
-              print("Tapped on color \(color)")
+              onColorSelected(color)
             }, label: {
+              // Hack needed to be able to show the colors.
+              // A butto can't render a Pixel view inside, it has to be a text :(
               Text("_")
             }).buttonStyle(PixelButtonStyle(color: color))
           }
         }
+        Spacer().frame(width: 16)
       }
       Spacer().frame(height: 10)
-      Text("Lightning # \(lightningNumber)")
+      HStack {
+        Text("Lightning # \(lightningNumber)")
+        Spacer().frame(width: 20)
+        Pixel(color: selectedColor).frame(height: 20).frame(width: 20)
+      }
     }
   }
 }
@@ -28,7 +38,7 @@ struct Pixel: View {
   }
 }
 
-private var colors: [Color] {
+private let colors: [Color] = {
   let colorStep = 50
   let upRange = stride(from: 0, to: 255, by: colorStep)
   let downRange = stride(from: 255, to: 0, by: colorStep * -1)
@@ -70,4 +80,4 @@ private var colors: [Color] {
     colors.append(color)
   }
   return colors
-}
+}()

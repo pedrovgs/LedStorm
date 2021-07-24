@@ -10,12 +10,18 @@ struct LedStormApp: App {
 }
 
 struct LedStormView: View {
-  @State private var count: Int = 0
+  @State var lightning1Color = Color.white
+  @State var lightning2Color = Color.white
   var body: some View {
     VStack {
-      LightningColorPicker(lightningNumber: 1)
-      Spacer()
-      LightningColorPicker(lightningNumber: 2)
+      Spacer().frame(height: 150)
+      LightningColorPicker(lightningNumber: 1, selectedColor: lightning1Color) {
+        lightning1Color = $0
+      }
+      Spacer().frame(height: 50)
+      LightningColorPicker(lightningNumber: 2, selectedColor: lightning2Color) {
+        lightning2Color = $0
+      }
       Spacer()
       Button(
         action: {
