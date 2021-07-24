@@ -65,7 +65,8 @@ def trigger_lightning(lightnings):
 def switch_lamp_on(lightnings):
     print("Turning lamp on")
     for lightning in lightnings:
-        fill(lightning.strip, lightning.color)
+        color = lightning.color
+        fill(lightning.strip, Color(color.red, color.green, color.blue))
 
 
 def show_lightning(strip, color):
