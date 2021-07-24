@@ -14,6 +14,7 @@ jobs:
         python -m pip install --upgrade pipenv wheel
     - name: Install dependencies
       run: pipenv install --dev
+      continue-on-error: true
     - name: Lint
       run: pipenv run pylint *.py
     - name: Test
