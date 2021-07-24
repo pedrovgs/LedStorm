@@ -1,5 +1,4 @@
 import Foundation
-import JavaScriptKit
 import TokamakDOM
 
 struct LedStormApp: App {
@@ -11,13 +10,38 @@ struct LedStormApp: App {
 }
 
 struct LedStormView: View {
-  @State private var count: Int = 0
+  @State var lightning1Color = LightningColor.white
+  @State var lightning2Color = LightningColor.white
   var body: some View {
     VStack {
+      Spacer().frame(height: 150)
+      LightningColorPicker(lightningNumber: 1, selectedColor: lightning1Color) {
+        print("Lightning 1 color selected = \($0)")
+        lightning1Color = $0
+      }
+      Spacer().frame(height: 50)
+      LightningColorPicker(lightningNumber: 2, selectedColor: lightning2Color) {
+        print("Lightning 2 color selected = \($0)")
+        lightning2Color = $0
+      }
       Spacer()
       Button(
         action: {
-          sendLightningRequest()
+          let lightning1 = Lightning(color: LightningColor(
+            red: lightning1Color.red,
+            green: lightning1Color.green,
+            blue: lightning1Color.blue
+          ))
+          let lightning2 = Lightning(color: LightningColor(
+            red: lightning2Color.red,
+            green: lightning2Color.green,
+            blue: lightning2Color.blue
+          ))
+          let storm = LedStorm(
+            lightning1: lightning1,
+            lightning2: lightning2
+          )
+          sendLightningRequest(storm: storm)
         },
         label: {
           Text("⚡️").font(.system(size: 160))
@@ -27,61 +51,4 @@ struct LedStormView: View {
   }
 }
 
-struct TransparentButtonStyle: ButtonStyle {
-  func makeBody(configuration: Configuration) -> some View {
-    let isPressed = configuration.isPressed
-    return configuration
-      .label.background(isPressed ? Color.buttonPressed : Color.clear)
-  }
-}
-
-extension Color {
-  static let buttonPressed = Color(red: 0.29, green: 0.29, blue: 0.29, opacity: 1.0)
-}
-
 LedStormApp.main()
-
-private func sendLightningRequest() {
-  print("CLICK")
-  let url = "http://raspberrypi.local"
-  let lightning1 = ["r": 255, "g": 255, "b": 255].jsValue()
-  let lightning2 = ["r": 255, "g": 255, "b": 255].jsValue()
-  let body: [String: ConvertibleToJSValue] = ["lightnings": [lightning1, lightning2]]
-  let fetchPromise: JSPromise = fetch(url, body)
-  fetchPromise.then { value -> String in
-    print("Value = \(value)")
-    return ""
-  } failure: { error -> String in
-    print("Error = \(error)")
-    return ""
-  }
-}
-
-func fetch(_ url: String, _ body: RequestBody) -> JSPromise {
-  let _jsFetch = JSObject.global.fetch.function!
-  let headers = JSObject.global
-  headers["Content-Type"] = "application/json"
-  let requestData = JSObject.global
-  requestData["method"] = "POST"
-  requestData["headers"] = ["Content-Type": "application/json"].jsValue()
-  requestData["body"] = """
-  {
-      "lightnings": [
-          {
-              "r": 255,
-              "g": 255,
-              "b": 255
-          },
-          {
-              "r": 255,
-              "g": 213,
-              "b": 255
-          }
-      ]
-  }
-  """
-  print(requestData)
-  return JSPromise(_jsFetch(url, requestData).object!)!
-}
-
-typealias RequestBody = [String: ConvertibleToJSValue]
