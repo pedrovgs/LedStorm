@@ -1,3 +1,2 @@
 brew "pre-commit"
 brew "swiftformat"
-brew "swiftwasm/tap/carton"
