@@ -2,16 +2,10 @@ name: Check Swift app
 on: [pull_request, push]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: Ubuntu-18.04
+    container:
+      image: ghcr.io/swiftwasm/carton:latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install carton
-      run: brew install swiftwasm/tap/carton
-    - name: Install dev dependencies
-      run: brew bundle
-      working-directory: app
-    - name: Check code format
-      run: swiftformat .
-      working-directory: app
     - name: Build
       run: carton bundle
