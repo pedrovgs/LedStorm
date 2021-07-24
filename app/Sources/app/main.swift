@@ -25,30 +25,48 @@ struct LedStormView: View {
         lightning2Color = $0
       }
       Spacer()
-      Button(
-        action: {
-          let lightning1 = Lightning(color: LightningColor(
-            red: lightning1Color.red,
-            green: lightning1Color.green,
-            blue: lightning1Color.blue
-          ))
-          let lightning2 = Lightning(color: LightningColor(
-            red: lightning2Color.red,
-            green: lightning2Color.green,
-            blue: lightning2Color.blue
-          ))
-          let storm = LedStorm(
-            lightning1: lightning1,
-            lightning2: lightning2
-          )
-          sendLightningRequest(storm: storm)
-        },
-        label: {
-          Text("⚡️").font(.system(size: 160))
-        }
-      ).buttonStyle(TransparentButtonStyle())
+      HStack {
+        Button(
+          action: {
+            let storm = composeStormFromState(lightning1Color, lightning2Color)
+            sendLightningRequest(storm: storm)
+          },
+          label: {
+            Text("⚡️").font(.system(size: 160))
+          }
+        ).buttonStyle(TransparentButtonStyle())
+        Button(
+          action: {
+            let storm = composeStormFromState(lightning1Color, lightning2Color)
+            sendSwitchLampOnRequest(storm: storm)
+          },
+          label: {
+            Text("💡").font(.system(size: 160))
+          }
+        ).buttonStyle(TransparentButtonStyle())
+      }
     }
   }
+}
+
+private func composeStormFromState(
+  _ lightning1Color: LightningColor,
+  _ lightning2Color: LightningColor
+) -> LedStorm {
+  let lightning1 = Lightning(color: LightningColor(
+    red: lightning1Color.red,
+    green: lightning1Color.green,
+    blue: lightning1Color.blue
+  ))
+  let lightning2 = Lightning(color: LightningColor(
+    red: lightning2Color.red,
+    green: lightning2Color.green,
+    blue: lightning2Color.blue
+  ))
+  return LedStorm(
+    lightning1: lightning1,
+    lightning2: lightning2
+  )
 }
 
 LedStormApp.main()
