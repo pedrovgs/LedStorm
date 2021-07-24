@@ -16,9 +16,5 @@ let package = Package(
         .product(name: "TokamakShim", package: "Tokamak"),
       ]
     ),
-    .testTarget(
-      name: "appTests",
-      dependencies: ["app"]
-    ),
   ]
 )
