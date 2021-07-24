@@ -1,10 +1,12 @@
 from flask import request, abort, Flask
+from flask_cors import CORS
 from led_strip import initialize, trigger_lightning
 from model import Color, Lightning
 
 
 def create_app(led_stripes):
     app = Flask(__name__)
+    CORS(app)
 
     @app.route("/")
     def health_check():
