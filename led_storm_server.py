@@ -1,6 +1,6 @@
 from flask import request, abort, Flask
 from flask_cors import CORS
-from led_strip import initialize, trigger_lightning
+from led_strip import initialize, switch_lamp_on, trigger_lightning
 from model import Color, Lightning
 
 
@@ -12,7 +12,31 @@ def create_app(led_stripes):
     def health_check():
         return "Hello LedStorm!"
 
-    @app.route("/", methods=["POST"])
+    @app.route("/lamp", methods=["POST"])
+    def lamp():
+        body = request.json
+        if body is None:
+            abort(400, "Request body should specify the lightning color.")
+        print("Lightning request received with data = %s", body)
+        request_lightnings = body.get("lightnings")
+        if request_lightnings is None:
+            abort(400, "Request body should specify the lightning color.")
+        if len(request_lightnings) < 2:
+            abort(
+                400,
+                "Request body should specify the lightning color for at least 2 lightnings.")
+        lightnings = []
+        index = 0
+        for lightning_in_request in request_lightnings:
+            if index >= len(led_stripes):
+                break
+            compose_lightning_from_request_body(
+                led_stripes, lightning_in_request, index, lightnings)
+            index = index + 1
+        switch_lamp_on(lightnings)
+        return "Lamp turned on!"
+
+    @app.route("/lightning", methods=["POST"])
     def lightning():
         body = request.json
         if body is None:
