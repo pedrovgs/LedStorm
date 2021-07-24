@@ -1,6 +1,7 @@
 import Foundation
 import JavaScriptKit
 import TokamakDOM
+import TokamakShim
 
 struct LedStormApp: App {
   var body: some Scene {
@@ -10,10 +11,78 @@ struct LedStormApp: App {
   }
 }
 
+var colors: [Color] {
+  let colorStep = 50
+  let upRange = stride(from: 0, to: 255, by: colorStep)
+  let downRange = stride(from: 255, to: 0, by: colorStep * -1)
+  var colors: [Color] = []
+  // Reds
+  upRange.forEach { color in
+    let rangeColor = Double(color) / 255
+    let color = Color(red: 1.0, green: rangeColor, blue: 0, opacity: 1.0)
+    colors.append(color)
+  }
+  // Yellows
+  downRange.forEach { color in
+    let rangeColor = Double(color) / 255
+    let color = Color(red: rangeColor, green: 1.0, blue: 0, opacity: 1.0)
+    colors.append(color)
+  }
+  // Greens
+  upRange.forEach { color in
+    let rangeColor = Double(color) / 255
+    let color = Color(red: 0, green: 1.0, blue: rangeColor, opacity: 1.0)
+    colors.append(color)
+  }
+  // Blues
+  downRange.forEach { color in
+    let rangeColor = Double(color) / 255
+    let color = Color(red: 0, green: rangeColor, blue: 1.0, opacity: 1.0)
+    colors.append(color)
+  }
+  // Purples
+  upRange.forEach { color in
+    let rangeColor = Double(color) / 255
+    let color = Color(red: rangeColor, green: 0, blue: 1.0, opacity: 1.0)
+    colors.append(color)
+  }
+  // Pinks
+  downRange.forEach { color in
+    let rangeColor = Double(color) / 255
+    let color = Color(red: 1, green: 0, blue: rangeColor, opacity: 1.0)
+    colors.append(color)
+  }
+  return colors
+}
+
+struct ColorPicker: View {
+  var body: some View {
+    HStack {
+      ForEach(colors, id: \.self) { color in
+        VStack {
+          Button(action: {
+            print("Tapped on color \(color)")
+          }, label: {
+            Text("_")
+          }).buttonStyle(PixelButtonStyle(color: color))
+        }
+      }
+    }
+  }
+}
+
+struct Pixel: View {
+  let color: Color
+  var body: some View {
+    color
+  }
+}
+
 struct LedStormView: View {
   @State private var count: Int = 0
   var body: some View {
     VStack {
+      ColorPicker()
       Spacer()
       Button(
         action: {
@@ -32,6 +101,14 @@ struct TransparentButtonStyle: ButtonStyle {
     let isPressed = configuration.isPressed
     return configuration
       .label.background(isPressed ? Color.buttonPressed : Color.clear)
+  }
+}
+
+struct PixelButtonStyle: ButtonStyle {
+  let color: Color
+  func makeBody(configuration: Configuration) -> some View {
+    configuration
+      .label.background(color).frame(width: 10).frame(height: 10)
   }
 }
 
