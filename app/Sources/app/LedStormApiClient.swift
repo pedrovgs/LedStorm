@@ -1,11 +1,24 @@
+import Foundation
 import JavaScriptKit
 
-func sendLightningRequest() {
-  print("CLICK")
+func sendLightningRequest(storm: LedStorm) {
   let url = "http://raspberrypi.local"
-  let lightning1 = ["r": 255, "g": 255, "b": 255].jsValue()
-  let lightning2 = ["r": 255, "g": 255, "b": 255].jsValue()
-  let body: [String: ConvertibleToJSValue] = ["lightnings": [lightning1, lightning2]]
+  let body = """
+  {
+      "lightnings": [
+          {
+              "r": \(storm.lightning1.color.red),
+              "g": \(storm.lightning1.color.green),
+              "b": \(storm.lightning1.color.blue)
+          },
+          {
+              "r": \(storm.lightning2.color.red),
+              "g": \(storm.lightning2.color.green),
+              "b": \(storm.lightning2.color.blue)
+          }
+      ]
+  }
+  """.jsValue()
   let fetchPromise: JSPromise = fetch(url, body)
   fetchPromise.then { value -> String in
     print("Value = \(value)")
@@ -16,29 +29,14 @@ func sendLightningRequest() {
   }
 }
 
-private func fetch(_ url: String, _ body: RequestBody) -> JSPromise {
+private func fetch(_ url: String, _ body: JSValue) -> JSPromise {
   let _jsFetch = JSObject.global.fetch.function!
   let headers = JSObject.global
   headers["Content-Type"] = "application/json"
   let requestData = JSObject.global
   requestData["method"] = "POST"
   requestData["headers"] = ["Content-Type": "application/json"].jsValue()
-  requestData["body"] = """
-  {
-      "lightnings": [
-          {
-              "r": 255,
-              "g": 255,
-              "b": 255
-          },
-          {
-              "r": 255,
-              "g": 213,
-              "b": 255
-          }
-      ]
-  }
-  """
+  requestData["body"] = body
   print(requestData)
   return JSPromise(_jsFetch(url, requestData).object!)!
 }
