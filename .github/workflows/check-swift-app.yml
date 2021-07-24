@@ -1,0 +1,15 @@
+name: Check Swift app
+on: [pull_request, push]
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: brew bundle
+      working-directory: app
+    - name: Check code format
+      run: swiftformat .
+      working-directory: app
+    - name: Build
+      run: carton bundle
