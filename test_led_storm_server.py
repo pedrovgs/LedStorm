@@ -11,8 +11,18 @@ def test_health_check():
     with flask_app.test_client() as test_client:
         response = test_client.get('/')
         assert response.status_code == 200
-        assert b'Hello LedStorm!' == response.data
 
+def test_static_js_files():
+    flask_app = create_led_storm_app()
+    with flask_app.test_client() as test_client:
+        response = test_client.get('/9133c52a64f5e42d.js')
+        assert response.status_code == 200
+
+def test_static_wasm_files():
+    flask_app = create_led_storm_app()
+    with flask_app.test_client() as test_client:
+        response = test_client.get('/4ed4062a6be0c733.wasm')
+        assert response.status_code == 200
 
 def test_does_not_show_ligtning_if_request_body_is_empty():
     flask_app = create_led_storm_app()

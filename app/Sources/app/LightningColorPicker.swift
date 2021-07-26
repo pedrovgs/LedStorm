@@ -22,7 +22,7 @@ struct LightningColorPicker: View {
         }
         Spacer().frame(width: 16)
       }
-      Spacer().frame(height: 10)
+      Spacer().frame(height: 30)
       HStack {
         Text("Lightning # \(lightningNumber)")
         Spacer().frame(width: 20)
