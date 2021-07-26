@@ -10,13 +10,15 @@ This project will also let you control the lamp from your browser using an app l
 
 You can select the colors of the two lightnings and decide to show two of them using 3 different patterns or turn them on forever by tapping on the ⚡️ or 💡 buttons.
 
-**Keep in mind this project is customizable, but you'll need to modify the hardware usage and also to tune the software to be able to use more than 2 fifty-leds-long stripes (which is the default configuration). If you do it, please share the result with us!** 
+**Keep in mind this project is customizable, but you'll need to modify the hardware usage and also to tune the software to be able to use more than 2 fifty-leds-long stripes (which is the default configuration). If you do it, please share the result with us!**
+
+If you want to change the hardware used in this project keep in mind you should buy led stripes compatible with [rpi-ws281x](https://github.com/rpi-ws281x/rpi-ws281x-python) library. NeoPixel WS2812B / WS2811 vs. WS2801 led stripes should work.
 
 ## Hardware instructions
 
 To be able to get your own led storm you'll need to buy some hardware:
 
-* [Raspberry Pi Zero](https://www.amazon.es/Raspberry-Pi-Zero-Kit-inicio/dp/B072LWBL37/ref=sr_1_5?__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=raspberry+pi+zero&qid=1627318147&sr=8-5)
+* [Raspberry Pi](https://www.amazon.es/Raspberry-Pi-Zero-Kit-inicio/dp/B072LWBL37/ref=sr_1_5?__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=raspberry+pi+zero&qid=1627318147&sr=8-5)
 * [Micro SD card](https://www.amazon.es/ARCANITE-Tarjeta-microSDXC-adaptador-AKV30A164/dp/B07RW7RSVQ/ref=sr_1_1_sspa?__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=micro+sd+card&qid=1627318348&sr=8-1-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEyUEVTQ0RQSzBYQzBHJmVuY3J5cHRlZElkPUEwMjA5MDIzVDE3SVhFQTRZS0Q2JmVuY3J5cHRlZEFkSWQ9QTA2ODIzNTczUjRDRUZFVDhZMldSJndpZGdldE5hbWU9c3BfYXRmJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ==)
 * [Wires](https://www.amazon.es/AZDelivery-Jumper-Arduino-Raspberry-Breadboard/dp/B07VFK8L9F/ref=sr_1_21?__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=raspberry+pi+jumper&qid=1627318379&sr=8-21)
 * [1m long 5v led stripes x 2](https://www.amazon.es/gp/product/B088B9LK1M/ref=ppx_yo_dt_b_asin_title_o09_s00?ie=UTF8&psc=1)
