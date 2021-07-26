@@ -1,30 +1,28 @@
 import Foundation
 import JavaScriptKit
 
-func sendLightningRequest(storm: LedStorm) {
-  let url = "http://raspberrypi.local"
-  let body = """
-  {
-      "lightnings": [
-          {
-              "r": \(storm.lightning1.color.red),
-              "g": \(storm.lightning1.color.green),
-              "b": \(storm.lightning1.color.blue)
-          },
-          {
-              "r": \(storm.lightning2.color.red),
-              "g": \(storm.lightning2.color.green),
-              "b": \(storm.lightning2.color.blue)
-          }
-      ]
-  }
-  """.jsValue()
+func sendSwitchLampOnRequest(storm: LedStorm) {
+  let url = "http://raspberrypi.local/lamp"
+  let body = composeBodyFromLedStorm(storm)
   let fetchPromise: JSPromise = fetch(url, body)
-  fetchPromise.then { value -> String in
-    print("Value = \(value)")
+  fetchPromise.then { _ -> String in
+    print("Lamp turned on!")
     return ""
   } failure: { error -> String in
-    print("Error = \(error)")
+    print("Error turning lamp on \(error)")
+    return ""
+  }
+}
+
+func sendLightningRequest(storm: LedStorm) {
+  let url = "http://raspberrypi.local/lightning"
+  let body = composeBodyFromLedStorm(storm)
+  let fetchPromise: JSPromise = fetch(url, body)
+  fetchPromise.then { _ -> String in
+    print("Lightning triggered!")
+    return ""
+  } failure: { error -> String in
+    print("Error sending lightning \(error)")
     return ""
   }
 }
@@ -42,3 +40,22 @@ private func fetch(_ url: String, _ body: JSValue) -> JSPromise {
 }
 
 typealias RequestBody = [String: ConvertibleToJSValue]
+
+private func composeBodyFromLedStorm(_ storm: LedStorm) -> JSValue {
+  """
+  {
+      "lightnings": [
+          {
+              "r": \(storm.lightning1.color.red),
+              "g": \(storm.lightning1.color.green),
+              "b": \(storm.lightning1.color.blue)
+          },
+          {
+              "r": \(storm.lightning2.color.red),
+              "g": \(storm.lightning2.color.green),
+              "b": \(storm.lightning2.color.blue)
+          }
+      ]
+  }
+  """.jsValue()
+}
