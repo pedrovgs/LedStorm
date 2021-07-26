@@ -1,4 +1,4 @@
-from flask import request, abort, Flask
+from flask import request, abort, Flask, render_template
 from flask_cors import CORS
 from led_strip import initialize, trigger_lightning
 from model import Color, Lightning
@@ -10,7 +10,7 @@ def create_app(led_stripes):
 
     @app.route("/")
     def health_check():
-        return "Hello LedStorm!"
+        return render_template("index.html")
 
     @app.route("/", methods=["POST"])
     def lightning():
