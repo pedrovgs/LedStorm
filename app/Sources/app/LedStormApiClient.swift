@@ -2,7 +2,7 @@ import Foundation
 import JavaScriptKit
 
 func sendSwitchLampOnRequest(storm: LedStorm) {
-  let url = "http://raspberrypi.local/lamp"
+  let url = "/lamp"
   let body = composeBodyFromLedStorm(storm)
   let fetchPromise: JSPromise = fetch(url, body)
   fetchPromise.then { _ -> String in
@@ -15,7 +15,7 @@ func sendSwitchLampOnRequest(storm: LedStorm) {
 }
 
 func sendLightningRequest(storm: LedStorm) {
-  let url = "http://raspberrypi.local/lightning"
+  let url = "/lightning"
   let body = composeBodyFromLedStorm(storm)
   let fetchPromise: JSPromise = fetch(url, body)
   fetchPromise.then { _ -> String in
