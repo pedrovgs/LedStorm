@@ -46,6 +46,8 @@ Once you buy everything, it is time to connect all the wires. You'll need to con
 
 Once you get all the wires in place, you'll need to install Raspberry Pi OS into your RaspberryPi. You can use [RaspberryPi Imager](https://www.raspberrypi.org/software/) or any other similar too. You'll need internet connection, so install the OS image and configure it to be installed to your local area network.
 
+Ensure you've disconected the audio input in your raspberry pi by commenting the line ``#dtparam=audio=on`` in the ``/boot/config.txt`` file.
+
 Once you are done you'll need to clone this repository and place it into any folder:
 
 ```
