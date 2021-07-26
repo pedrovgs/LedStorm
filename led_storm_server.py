@@ -5,7 +5,7 @@ from model import Color, Lightning
 
 
 def create_app(led_stripes):
-    app = Flask(__name__)
+    app = Flask(__name__, static_url_path='', static_folder='static')
     CORS(app)
 
     @app.route("/")
