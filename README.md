@@ -1,18 +1,16 @@
 # LedStorm ![Train](https://github.com/pedrovgs/LedStorm/workflows/Check/badge.svg)
 
-Imagination, some leds, and a RaspberryPi will take you wherever you want.
-
-This repository contains all the instructions and code neede dto be able to create your own 🌩 led strom 🌩 You can use it for decoration purposes, as a lamp or as inspiration for any other project :smiley: Depending on your DIY skills the result would look like this:
+This repository contains all the instructions and code needed to be able to create your own 🌩 led strom 🌩 You can use it for decoration purposes, as a lamp or as inspiration for any other project :smiley: Depending on your DIY skills the result would look like this:
 
 ![showcase](./art/showcase.gif)
 
 This project will also let you control the lamp from your browser using an app like this:
 
-![appScreenshot.png](./art/appScreenshot.png)
+<img src="./art/appScreenshot.png" width="350"/>
 
 You can select the colors of the two lightnings and decide to show two of them using 3 different patterns or turn them on forever by tapping on the ⚡️ or 💡 buttons.
 
-**Keep in mind this project is customizable, but you'll need to modify the Hardware usage and also to tune the software to be able to use more than 2 fifty-leds-long stripes. If you do it, please share the result with us!** 
+**Keep in mind this project is customizable, but you'll need to modify the hardware usage and also to tune the software to be able to use more than 2 fifty-leds-long stripes (which is the default configuration). If you do it, please share the result with us!** 
 
 ## Hardware instructions
 
@@ -21,7 +19,7 @@ To be able to get your own led storm you'll need to buy some hardware:
 * [Raspberry Pi Zero](https://www.amazon.es/Raspberry-Pi-Zero-Kit-inicio/dp/B072LWBL37/ref=sr_1_5?__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=raspberry+pi+zero&qid=1627318147&sr=8-5)
 * [Micro SD card](https://www.amazon.es/ARCANITE-Tarjeta-microSDXC-adaptador-AKV30A164/dp/B07RW7RSVQ/ref=sr_1_1_sspa?__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=micro+sd+card&qid=1627318348&sr=8-1-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEyUEVTQ0RQSzBYQzBHJmVuY3J5cHRlZElkPUEwMjA5MDIzVDE3SVhFQTRZS0Q2JmVuY3J5cHRlZEFkSWQ9QTA2ODIzNTczUjRDRUZFVDhZMldSJndpZGdldE5hbWU9c3BfYXRmJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ==)
 * [Wires](https://www.amazon.es/AZDelivery-Jumper-Arduino-Raspberry-Breadboard/dp/B07VFK8L9F/ref=sr_1_21?__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=raspberry+pi+jumper&qid=1627318379&sr=8-21)
-* [5v led stripes x 2](https://www.amazon.es/gp/product/B088B9LK1M/ref=ppx_yo_dt_b_asin_title_o09_s00?ie=UTF8&psc=1)
+* [1m long 5v led stripes x 2](https://www.amazon.es/gp/product/B088B9LK1M/ref=ppx_yo_dt_b_asin_title_o09_s00?ie=UTF8&psc=1)
 * [Ultrasounds Sensor](https://www.amazon.es/M%C3%B3dulo-medici%C3%B3n-distancia-ultras%C3%B3nico-precisi%C3%B3n/dp/B088PCXB5M/ref=asc_df_B088PCXB5M/?tag=googshopes-21&linkCode=df0&hvadid=469181688672&hvpos=&hvnetw=g&hvrand=18132390602775342885&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1005419&hvtargid=pla-971971076325&psc=1) This one is optional, you don't need to buy it if you don't want to use it.
 * Cotton.
 * Cardboard.
@@ -114,7 +112,7 @@ Remember you'll have to update server-side bundle if you change the client-side 
 
 All the code is configured to use GitHub actions as the main CI tool. You can review the details in the ``.github/workflows`` folder. 
 
-🌩🌩🌩 I hope you like this project, have fun with your brand new storm 🌩🌩🌩
+🌩🌩🌩 I hope you like this project, have fun with your brand new storm. Remember, imagination, some leds, and a RaspberryPi will take you wherever you want 🌩🌩🌩
 
 Developed By
 ------------
