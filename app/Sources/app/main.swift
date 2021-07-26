@@ -4,7 +4,7 @@ import TokamakDOM
 struct LedStormApp: App {
   var body: some Scene {
     WindowGroup("Tokamak App") {
-      LedStormView().background(Color(hex: "#1D1D1D"))
+      LedStormView()
     }
   }
 }
