@@ -9,12 +9,9 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: '3.9'
-    - name: Install pipenv
-      run: python -m pip install --upgrade pipenv wheel
-    - name: Install dependencies
-      run: pipenv install --dev
-      continue-on-error: true
+    - name: Install dev dependencies
+      run: pip install pylint autopep8 pytest pytest-mock flask flask-cors
     - name: Lint
-      run: pipenv run pylint *.py
+      run: pylint *.py
     - name: Test
-      run: pipenv run py.test -v
+      run: pytest -v
