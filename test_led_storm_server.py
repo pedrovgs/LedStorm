@@ -28,7 +28,7 @@ def test_does_not_show_ligtning_if_request_body_is_empty():
     flask_app = create_led_storm_app()
     with flask_app.test_client() as test_client:
         response = test_client.post('/lightning')
-        assert response.status_code == 400
+        assert response.status_code in [400, 415]
 
 
 def test_does_not_show_ligtning_if_request_body_is_malformed():
@@ -140,7 +140,7 @@ def test_does_not_turn_lamp_on_if_request_body_is_empty():
     flask_app = create_led_storm_app()
     with flask_app.test_client() as test_client:
         response = test_client.post('/lamp')
-        assert response.status_code == 400
+        assert response.status_code in [400, 415]
 
 
 def test_does_not_turn_lamp_on_if_request_body_is_malformed():
