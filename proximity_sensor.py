@@ -13,7 +13,7 @@ def measure_distance_from_sensor():
     print("Requesting distance measure")
     trigger_distance_measure_signal()
     distance = read_distance_using_time_elapsed_between_echos()
-    print("Measured Distance = %.1f cm" % distance)
+    print(f"Measured Distance = {distance:.1f} cm")
     return distance
 
 
